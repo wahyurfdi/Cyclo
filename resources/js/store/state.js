@@ -1,6 +1,7 @@
 export default {
     trashTypes: [
         {
+            id: 1,
             title: 'Plastik',
             description: 'Sampah berbahan plastik',
             image: '/img/trash-type/trash-01.jpg',
@@ -9,6 +10,7 @@ export default {
             weightPerQty: 0.5
         },
         {
+            id: 2,
             title: 'Kertas',
             description: 'Sampah berbahan kertas',
             image: '/img/trash-type/trash-02.jpg',
@@ -17,6 +19,7 @@ export default {
             weightPerQty: 0.1
         },
         {
+            id: 3,
             title: 'Kaleng',
             description: 'Sampah berbahan kaleng',
             image: '/img/trash-type/trash-03.jpg',
@@ -25,6 +28,7 @@ export default {
             weightPerQty: 0.5
         },
         {
+            id: 4,
             title: 'Kaca',
             description: 'Sampah berbahan kaca',
             image: '/img/trash-type/trash-04.jpg',

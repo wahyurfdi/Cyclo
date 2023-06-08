@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from './../views/Login.vue'
 import Home from './../views/Home.vue'
 import History from './../views/History.vue'
+import HistoryDetail from './../views/HistoryDetail.vue'
 import Profile from './../views/Profile.vue'
 import TrashForm from './../views/request-pickup/TrashForm.vue'
 import AddressForm from './../views/request-pickup/AddressForm.vue'
@@ -25,6 +26,11 @@ const routes = [
         path: '/web-app/history',
         name: 'history',
         component: History
+    },
+    {
+        path: '/web-app/history/:code',
+        name: 'history.detail',
+        component: HistoryDetail
     },
     {
         path: '/web-app/profile',

@@ -14,10 +14,15 @@ use App\Http\Controllers\WebAppController;
 |
 */
 
+Route::prefix('cms')->group(function() {
+
+});
+
 Route::prefix('web-app')->group(function() {
     Route::get('/login', [WebAppController::class, 'index']);
     Route::get('/home', [WebAppController::class, 'index']);
     Route::get('/history', [WebAppController::class, 'index']);
+    Route::get('/history/{code}', [WebAppController::class, 'index']);
     Route::get('/profile', [WebAppController::class, 'index']);
     Route::get('/request-pickup/trash-form', [WebAppController::class, 'index']);
     Route::get('/request-pickup/address-form', [WebAppController::class, 'index']);

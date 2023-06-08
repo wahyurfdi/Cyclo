@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="w-6/12">
-                        <button class="mb-auto py-4 px-4 rounded-[10px] bg-green text-left flex w-full" @click="$router.push('/web-app/request-pickup/address-form')">
+                        <button class="mb-auto py-3 px-4 rounded-[10px] bg-green text-left flex w-full" @click="$router.push('/web-app/request-pickup/address-form')">
                             <span class="font-semibold text-white text-sm">Lanjutkan</span>
                             <i class="fa fa-chevron-right text-yellow text-base ml-auto my-auto"></i>
                         </button>
