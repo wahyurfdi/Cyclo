@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="w-6/12">
-                    <button class="mb-auto py-3 px-4 rounded-[10px] bg-green text-left flex w-full" @click="sendTransaction()">
+                    <button class="mb-auto py-3 px-4 rounded-[10px] text-left flex w-full" :class="[form.nama == '' || form.telepon == '' || form.alamat == '' ? 'bg-gray-dark' : 'bg-green']" @click="sendTransaction()">
                         <span class="font-semibold text-white text-base">Request Pickup</span>
                         <i class="fa fa-chevron-right text-yellow text-sm ml-auto my-auto"></i>
                     </button>
