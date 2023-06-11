@@ -1,4 +1,9 @@
 export default {
+    token: '',
+    toast: {
+        isShow: false,
+        message: ''
+    },
     trashTypes: [
         {
             id: 1,

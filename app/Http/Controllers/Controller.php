@@ -39,6 +39,6 @@ class Controller extends BaseController
         return response()->json([
             'status' => 'FAIL',
             'message' => $message
-        ], $code);
+        ]);
     }
 }

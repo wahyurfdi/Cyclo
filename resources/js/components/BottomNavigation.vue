@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white p-[10px] shadow-navigation w-full absolute bottom-0 left-0 rounded-tl-[20px] rounded-tr-[20px] grid grid-flow-col">
+    <div class="bg-white p-[10px] shadow-navigation w-full max-w-[512px] fixed bottom-0 mx-auto rounded-tl-[20px] rounded-tr-[20px] grid grid-flow-col">
         <div v-for="(menu, i) in menus" :key="i" class="flex flex-col text-xs grid-cols-4" @click="$router.push(menu.action)">
             <i :class="[menu.icon, menuActived == menu.id ? 'text-green' : 'text-gray']" class="text-2xl mt-auto mx-auto mb-1"></i>
             <span class="text-xs mb-auto mx-auto" :class="[menuActived == menu.id ? 'text-green font-bold' : 'text-gray font-medium']">{{ menu.name }}</span>

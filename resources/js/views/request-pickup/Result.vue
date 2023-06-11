@@ -8,7 +8,7 @@
 
             <div class="w-full h-full flex">
                 <div class="text-center m-auto flex flex-col">
-                    <i class="fa fa-check-circle text-8xl text-green mb-6 animate-bounce"></i>
+                    <i class="fa fa-check-circle text-8xl text-green mb-6 animate__animated animate__bounce"></i>
                     <span class="text-xl font-bold mb-3">Yayy! Request Dibuat</span>
                     <span class="text-sm font-medium text-gray-dark">
                         Driver akan menjemput sampah daur <br> ulang ke alamat mu segera

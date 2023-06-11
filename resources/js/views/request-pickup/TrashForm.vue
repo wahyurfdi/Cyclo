@@ -26,25 +26,25 @@
                     </trash-type-item>
                 </div>
             </div>
-
-            <div class="shadow-navigation absolute bottom-0 left-0 px-6 pt-5 pb-[26px] w-full">
-                <div class="flex">
-                    <div class="w-6/12 flex flex-col">
-                        <span class="text-sm font-bold mb-2">{{ totalQty }} Item, {{ totalWeight }} Kg</span>
-                        <div class="flex">
-                            <span class="text-sm font-normal text-gray-dark my-auto">Dapat Koin</span>
-                            <div class="my-auto ml-1">
-                                <i class="fa fa-circle text-xs text-yellow"></i>
-                                <span class="text-sm font-medium ml-1">{{ totalCoin }}</span>
-                            </div>
+        </div>
+        
+        <div class="bg-white shadow-navigation fixed bottom-0 mx-auto px-6 pt-5 pb-[26px] w-full max-w-[512px]">
+            <div class="flex">
+                <div class="w-6/12 flex flex-col">
+                    <span class="text-sm font-bold mb-2">{{ totalQty }} Item, {{ totalWeight }} Kg</span>
+                    <div class="flex">
+                        <span class="text-sm font-normal text-gray-dark my-auto">Dapat Koin</span>
+                        <div class="my-auto ml-1">
+                            <i class="fa fa-circle text-xs text-yellow"></i>
+                            <span class="text-sm font-medium ml-1">{{ totalCoin }}</span>
                         </div>
                     </div>
-                    <div class="w-6/12">
-                        <button class="mb-auto py-3 px-4 rounded-[10px] bg-green text-left flex w-full" @click="$router.push('/web-app/request-pickup/address-form')">
-                            <span class="font-semibold text-white text-sm">Lanjutkan</span>
-                            <i class="fa fa-chevron-right text-yellow text-base ml-auto my-auto"></i>
-                        </button>
-                    </div>
+                </div>
+                <div class="w-6/12">
+                    <button class="mb-auto py-3 px-4 rounded-[10px] text-left flex w-full" :class="[totalQty != 0 ? 'bg-green' : 'bg-gray-dark']" @click="saveForm()">
+                        <span class="font-semibold text-white text-base">Lanjutkan</span>
+                        <i class="fa fa-chevron-right text-yellow text-sm ml-auto my-auto"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -90,7 +90,12 @@
             }
         },
         methods: {
-            ...mapActions(['updateTrashQty'])
+            ...mapActions(['updateTrashQty', 'showToast']),
+            saveForm() {
+                if(this.totalQty == 0) return this.showToast('Harap memilih jenis sampah')
+
+                this.$router.push('/web-app/request-pickup/address-form')
+            }
         }
     }
 </script>

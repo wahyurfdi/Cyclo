@@ -5,9 +5,9 @@
                 <i class="fas fa-circle-user text-[116px] text-green"></i>
                 <span class="text-base font-bold mt-3">WAHYU RIFALDI</span>
                 <span class="text-base text-gray-dark mt-2">@wahyurfldi</span>
-                <button class="mb-auto py-3 px-3 rounded-[10px] bg-yellow text-left flex text-green-dark mt-16" @click="$router.push('/web-app/login')">
-                    <span class="font-semibold text-sm">Logout</span>
-                    <i class="fa fa-right-from-bracket text- ml-auto my-auto"></i>
+                <button class="mb-auto py-3 px-4 rounded-[10px] bg-yellow text-left flex text-green-dark mt-16" @click="logout()">
+                    <span class="font-semibold text-base">Logout</span>
+                    <i class="fa fa-right-from-bracket text-sm ml-auto my-auto"></i>
                 </button>
             </div>
         </div>
@@ -25,6 +25,13 @@
         components: {
             'container': Container,
             'bottom-navigation': BottomNavigation
+        },
+        methods: {
+            logout() {
+                localStorage.removeItem('token')
+
+                this.$router.push('/web-app/login')
+            }
         }
     }
 </script>
