@@ -1,5 +1,6 @@
 export default {
     token: '',
+    profile: '',
     toast: {
         isShow: false,
         message: ''

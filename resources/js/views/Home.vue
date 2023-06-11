@@ -15,14 +15,14 @@
                         <span class="text-xs">Koin Kamu</span>
                         <div>
                             <i class="fa fa-circle text-xs text-yellow"></i>
-                            <span class="text-base font-bold ml-1">1.000</span>
+                            <span class="text-base font-bold ml-1">{{ profile.coin ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="w-[1px] bg-white h-6 my-auto mx-4"></div>
                     <div class="flex flex-col text-white">
                         <span class="text-xs">Kontribusi Kamu</span>
                         <div>
-                            <span class="text-base font-bold ml-1">100 Kg</span>
+                            <span class="text-base font-bold ml-1">{{ profile.contribution?.weight ?? '' }} Kg</span>
                         </div>
                     </div>
                 </div>
@@ -87,6 +87,7 @@
 <script>
     import Container from './../components/Container.vue'
     import BottomNavigation from './../components/BottomNavigation.vue'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'App',
@@ -118,6 +119,9 @@
                     }
                 ]
             }
+        },
+        computed: {
+            ...mapState(['profile'])
         }
     }
 </script>

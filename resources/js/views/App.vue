@@ -16,14 +16,21 @@
             'toast': Toast
         },
         computed: {
-            ...mapState(['toast'])
+            ...mapState(['toast', 'token'])
         },
         created() {
             let token = localStorage.getItem('token')
             this.setToken(token)
+            this.loadProfile()
         },
         methods: {
-            ...mapActions(['setToken'])
+            ...mapActions(['setToken', 'setProfile']),
+            loadProfile() {
+                this.$http.get('/api/profile', { headers: {'Authorization' : `Bearer ${this.token}`} })
+                    .then((result) => {
+                        this.setProfile(result.data.result)
+                    })
+            }
         }
     }
 </script>

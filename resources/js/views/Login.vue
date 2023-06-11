@@ -59,7 +59,8 @@
                         if(result.data.status == 'OK') {
                             localStorage.setItem('token', result.data.result.token)
 
-                            this.$router.push('/web-app/home')
+                            // this.$router.push('/web-app/home')
+                            location.href = '/web-app/home'
                         } else {
                             this.showToast(result.data.message)
                         }

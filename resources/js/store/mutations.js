@@ -1,3 +1,7 @@
+export const SET_PROFILE = (state, profile) => {
+    state.profile = profile
+}
+
 export const SET_TOKEN = (state, token) => {
     state.token = token
 }

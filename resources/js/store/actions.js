@@ -1,3 +1,7 @@
+export const setProfile = ({ commit }, profile) => {
+    commit('SET_PROFILE', profile)
+}
+
 export const setToken = ({ commit }, token) => {
     commit('SET_TOKEN', token)
 }

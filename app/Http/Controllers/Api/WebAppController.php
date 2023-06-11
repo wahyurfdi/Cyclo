@@ -57,10 +57,15 @@ class WebAppController extends Controller
         $customer = Customer::where('id', $customerId)->first();
         if(empty($customer)) return $this->sendResponseError('User tidak ditemukan');
 
+        $totalWeight = TrashTransaction::where('customer_id', $customerId)->sum('total_weight');
+
         return $this->sendResponseSuccess('', [
             'name' => $customer->name,
             'username' => $customer->username,
-            'coin' => $customer->coin
+            'coin' => $customer->coin,
+            'contribution' => [
+                'weight' => $totalWeight
+            ]
         ]);
     }
 
