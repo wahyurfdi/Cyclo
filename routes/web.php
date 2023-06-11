@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebAppController;
+use App\Http\Controllers\TrashTransactionController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,11 @@ use App\Http\Controllers\WebAppController;
 */
 
 Route::prefix('cms')->group(function() {
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::prefix('/trash/transaction')->group(function() {
+        Route::get('/', [TrashTransactionController::class, 'index'])->name('trash.transaction');
+        Route::put('/status', [TrashTransactionController::class, 'updateStatus']);
+    });
 });
 
 Route::prefix('web-app')->group(function() {
