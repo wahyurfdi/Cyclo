@@ -119,7 +119,7 @@
             this.loadHistoryDetail()
         },
         methods: {
-            ...mapActions(['updateTrashQty', 'showToast']),
+            ...mapActions(['checkRequestError', 'updateTrashQty', 'showToast']),
             loadHistoryDetail() {
                 this.loading.screen = true
 
@@ -136,6 +136,8 @@
                     })
                     .catch((error) => {
                         this.loading.screen = false
+
+                        this.checkRequestError(error)
                     })
             },
             cancelTransaction() {
@@ -154,6 +156,8 @@
                     })
                     .catch((error) => {
                         this.loading.screen = false
+
+                        this.checkRequestError(error)
                     })
             }
         }

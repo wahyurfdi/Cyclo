@@ -19,16 +19,21 @@
             ...mapState(['toast', 'token'])
         },
         created() {
-            let token = localStorage.getItem('token')
-            this.setToken(token)
-            this.loadProfile()
+            if(this.$route.name != 'login') {
+                let token = localStorage.getItem('token')
+                this.setToken(token)
+                this.loadProfile()
+            }
         },
         methods: {
-            ...mapActions(['setToken', 'setProfile']),
+            ...mapActions(['checkRequestError', 'setToken', 'setProfile']),
             loadProfile() {
                 this.$http.get('/api/profile', { headers: {'Authorization' : `Bearer ${this.token}`} })
                     .then((result) => {
                         this.setProfile(result.data.result)
+                    })
+                    .catch((error) => {
+                        this.checkRequestError(error)
                     })
             }
         }

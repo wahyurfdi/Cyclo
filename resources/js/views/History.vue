@@ -44,7 +44,7 @@
 <script>
     import Container from './../components/Container.vue'
     import BottomNavigation from './../components/BottomNavigation.vue'
-    import { mapState } from 'vuex'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         name: 'App',
@@ -64,6 +64,7 @@
             this.loadHistory()
         },
         methods: {
+            ...mapActions(['checkRequestError']),
             loadHistory() {
                 this.$http.get('/api/trash/transaction/list', { headers: {'Authorization' : `Bearer ${this.token}`} })
                     .then((result) => {
@@ -71,7 +72,9 @@
                             this.historyList = result.data.result.trash_transaction_list
                         }
                     })
-                    .catch((error) => {})
+                    .catch((error) => {
+                        this.checkRequestError(error)
+                    })
             }
         }
     }

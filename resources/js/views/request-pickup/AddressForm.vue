@@ -104,7 +104,7 @@
         },
         mounted() {},
         methods: {
-            ...mapActions(['updateTrashQty', 'showToast']),
+            ...mapActions(['checkRequestError', 'updateTrashQty', 'showToast']),
             sendTransaction() {
                 if(this.form.nama == '') {
                     return this.showToast('Harap mengisi nama')
@@ -144,6 +144,8 @@
                     })
                     .catch((error) => {
                         this.loading.screen = false
+
+                        this.checkRequestError(error)
                     })
             }
         }

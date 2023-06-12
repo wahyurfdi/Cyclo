@@ -45,7 +45,7 @@
         },
         computed: {},
         methods: {
-            ...mapActions(['showToast']),
+            ...mapActions(['checkRequestError', 'showToast']),
             login() {
                 this.loading.screen = true
 
@@ -67,6 +67,8 @@
                     })
                     .catch((error) => {
                         this.loading.screen = false
+
+                        this.checkRequestError(error)
                     })
             }
         }

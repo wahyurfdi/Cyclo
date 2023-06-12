@@ -1,3 +1,17 @@
+import router from './../router'
+
+export const checkRequestError = ({ commit }, error) => {
+    if(error.response) {
+        if(error.response.status == 401) {
+            localStorage.removeItem('token')
+
+            router.push('/web-app/login')
+        } else {
+            commit('SHOW_TOAST', error.response.data.message)
+        }
+    }
+}
+
 export const setProfile = ({ commit }, profile) => {
     commit('SET_PROFILE', profile)
 }
