@@ -34,11 +34,11 @@ class Controller extends BaseController
         ], $code);
     }
 
-    public function sendResponseError($message='', $code=404)
+    public function sendResponseError($message='', $code=400)
     {
         return response()->json([
             'status' => 'FAIL',
             'message' => $message
-        ]);
+        ], $code);
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebAppController;
 use App\Http\Controllers\TrashTransactionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,17 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function() {
+    return redirect()->route('login');
+});
 
 Route::prefix('cms')->group(function() {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::prefix('cms')->middleware(['auth'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('/trash/transaction')->group(function() {
         Route::get('/', [TrashTransactionController::class, 'index'])->name('trash.transaction');

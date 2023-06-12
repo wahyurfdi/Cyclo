@@ -33,7 +33,7 @@ class WebAppController extends Controller
 
         $customer = Customer::where('username', $request->username)->first();
         if(empty($customer)) {
-            return $this->sendResponseError('User tidak ditemukan', 401);
+            return $this->sendResponseError('User tidak ditemukan');
         }
 
         if(!Hash::check($request->password, $customer->password)) {
@@ -55,7 +55,7 @@ class WebAppController extends Controller
         $customerId = $token->user_id;
         
         $customer = Customer::where('id', $customerId)->first();
-        if(empty($customer)) return $this->sendResponseError('User tidak ditemukan');
+        if(empty($customer)) return $this->sendResponseError('User tidak ditemukan', 401);
 
         $totalWeight = TrashTransaction::where('customer_id', $customerId)->sum('total_weight');
 
@@ -150,7 +150,7 @@ class WebAppController extends Controller
             return $this->sendResponseSuccess('Transaksi berhasil dibuat', []);
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->sendResponseError($e->getMessage(), 400);
+            return $this->sendResponseError($e->getMessage());
         }
     }
 
@@ -170,10 +170,10 @@ class WebAppController extends Controller
         }
         
         $trashTransaction = TrashTransaction::where('code', $request->trash_transaction_code)->where('status_code', 'PENDING')->first();
-        if(empty($trashTransaction)) return $this->sendResponseError('Transaksi tidak bisa dibatalkan', 400);
+        if(empty($trashTransaction)) return $this->sendResponseError('Transaksi tidak bisa dibatalkan');
 
         $updateTrashTransaction = TrashTransaction::where('code', $request->trash_transaction_code)->update(['status_code' => 'CANCEL']);
-        if(empty($updateTrashTransaction)) return $this->sendResponseError('Transaksi tidak bisa dibatalkan', 400);
+        if(empty($updateTrashTransaction)) return $this->sendResponseError('Transaksi tidak bisa dibatalkan');
 
         return $this->sendResponseSuccess('Transaksi berhasil dibatalkan', []);
     }
@@ -221,7 +221,7 @@ class WebAppController extends Controller
         }
 
         $trashTransaction = TrashTransaction::where('code', $request->trash_transaction_code)->first();
-        if(empty($trashTransaction)) return $this->sendResponseError('Transaksi tidak ditemukan', 400);
+        if(empty($trashTransaction)) return $this->sendResponseError('Transaksi tidak ditemukan');
 
         $fetchTrashTransactionItem = TrashTransactionItem::select([
                 'trash_type.name',
