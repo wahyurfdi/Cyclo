@@ -79,7 +79,6 @@
 					<div class="sidebar-menu">
 						<ul class="menu">
 							<li class="sidebar-title">Menu</li>
-
 							<li class="sidebar-item {{ Route::current()->getName() == 'dashboard' ? 'active' : '' }}">
 								<a href="/cms/dashboard" class="sidebar-link">
 									<i class="bi bi-grid-fill"></i>
@@ -92,33 +91,33 @@
 									<span>Transaction</span>
 								</a>
 							</li>
-							<li class="sidebar-item has-sub">
+							<li class="sidebar-item has-sub {{ in_array(Route::current()->getName(), ['user', 'trash.type']) ? 'active' : '' }}">
 								<a href="#" class="sidebar-link">
 									<i class="bi bi-table"></i>
 									<span>Master Data</span>
 								</a>
 
 								<ul class="submenu">
-									<li class="submenu-item">
-										<a href="extra-component-avatar.html" class="submenu-link">
-											Trash Type
+									<li class="submenu-item {{ Route::current()->getName() == 'user' ? 'active' : '' }}">
+										<a href="/cms/user" class="submenu-link">
+											User Account
 										</a>
 									</li>
-									<li class="submenu-item">
-										<a href="extra-component-divider.html" class="submenu-link">
-											User Account
+									<li class="submenu-item {{ Route::current()->getName() == 'trash.type' ? 'active' : '' }}">
+										<a href="/cms/trash/type" class="submenu-link">
+											Trash Type
 										</a>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</div>
-					<form action="/cms/logout" method="POST">
+					<!-- <form action="/cms/logout" method="POST">
 						@csrf
 						<button class="btn btn-link text-danger text-decoration-none w-100 mt-4">
 							Log Out
 						</button>
-					</form>
+					</form> -->
 				</div>
 			</div>
 			<div id="main">

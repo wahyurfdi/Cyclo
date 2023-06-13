@@ -5,6 +5,8 @@ use App\Http\Controllers\WebAppController;
 use App\Http\Controllers\TrashTransactionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TrashTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,14 @@ Route::prefix('cms')->middleware(['auth'])->group(function() {
     Route::prefix('/trash/transaction')->group(function() {
         Route::get('/', [TrashTransactionController::class, 'index'])->name('trash.transaction');
         Route::put('/status', [TrashTransactionController::class, 'updateStatus']);
+    });
+    Route::get('/trash/type', [TrashTypeController::class, 'index'])->name('trash.type');
+    Route::prefix('/user')->group(function() {
+        Route::get('/', [UserController::class, 'index'])->name('user');
+        Route::get('/detail', [UserController::class, 'getUserDetail']);
+        Route::post('/', [UserController::class, 'storeUser']);
+        Route::put('/', [UserController::class, 'updateUser']);
+        Route::delete('/', [UserController::class, 'deleteUser']);
     });
 });
 
