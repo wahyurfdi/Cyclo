@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\WebAppController;
 */
 
 Route::post('/login', [WebAppController::class, 'login']);
+Route::post('/signup', [WebAppController::class, 'signup']);
 Route::get('/profile', [WebAppController::class, 'getProfile']);
 Route::prefix('trash')->group(function() {
     Route::post('/transaction/create', [WebAppController::class, 'createTrashTransaction']);

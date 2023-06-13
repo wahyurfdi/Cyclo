@@ -48,6 +48,44 @@ class WebAppController extends Controller
         ]);
     }
 
+    public function signup(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'username' => 'required',
+            'password' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
+        ], [
+            'username.required' => 'Username tidak boleh kosong',
+            'password.required' => 'Password tidak boleh kosong',
+            'name.required' => 'Nama tidak boleh kosong',
+            'phone.required' => 'Telepon tidak boleh kosong',
+            'address.required' => 'Alamat tidak boleh kosong'
+        ]);
+
+        if($validation->fails()) {
+            $errors = $validation->errors()->messages();
+            foreach($errors as $error) {
+                return $this->sendResponseError($error[0]);
+            }
+        }
+
+        $addCustomer = Customer::insert([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'location_detail' => !empty($request->location_detail) ? $request->location_detail : null,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+        if(!$addCustomer) return $this->sendResponseError('Gagal mendaftar, silahkan coba lagi');
+
+        return $this->sendResponseSuccess('Berhasil mendaftarkan akun', []);
+    }
+
     public function getProfile(Request $request)
     {
         $token = $this->getTokenDetail($request->bearerToken());
@@ -57,11 +95,14 @@ class WebAppController extends Controller
         $customer = Customer::where('id', $customerId)->first();
         if(empty($customer)) return $this->sendResponseError('User tidak ditemukan', 401);
 
-        $totalWeight = TrashTransaction::where('customer_id', $customerId)->sum('total_weight');
+        $totalWeight = TrashTransaction::where('customer_id', $customerId)->where('status_code', 'COMPLETED')->sum('total_weight');
 
         return $this->sendResponseSuccess('', [
             'name' => $customer->name,
+            'phone' => $customer->phone,
             'username' => $customer->username,
+            'address' => $customer->address,
+            'location_detail' => $customer->location_detail,
             'coin' => $customer->coin,
             'contribution' => [
                 'weight' => $totalWeight

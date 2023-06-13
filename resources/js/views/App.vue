@@ -19,7 +19,7 @@
             ...mapState(['toast', 'token'])
         },
         created() {
-            if(this.$route.name != 'login') {
+            if(this.$route.name != 'login' && this.$route.name != 'signup') {
                 let token = localStorage.getItem('token')
                 this.setToken(token)
                 this.loadProfile()

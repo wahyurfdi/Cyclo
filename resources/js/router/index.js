@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from './../views/Login.vue'
+import Signup from './../views/Signup.vue'
 import Home from './../views/Home.vue'
 import History from './../views/History.vue'
 import HistoryDetail from './../views/HistoryDetail.vue'
@@ -16,6 +17,11 @@ const routes = [
         path: '/web-app/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/web-app/signup',
+        name: 'signup',
+        component: Signup
     },
     {
         path: '/web-app/home',
@@ -61,9 +67,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     let token = localStorage.getItem('token')
-    if(to.name !== 'login' && (token === null || token === '')) {
+    if((to.name !== 'login' && to.name !== 'signup') && (token === null || token === '')) {
         next({ name: 'login' })
-    } else if(to.name === 'login' && (token !== null && token !== '')) {
+    } else if((to.name === 'login' || to.name === 'signup') && (token !== null && token !== '')) {
         next({ name: 'home' })
     } else {
         next()

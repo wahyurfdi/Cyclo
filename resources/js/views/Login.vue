@@ -11,8 +11,8 @@
                         <!-- <i class="fa fa-chevron-right text-yellow text-base ml-auto my-auto"></i> -->
                     </button>
                 </div>
-                <div class="w-12/12 flex mt-3">
-                    <a href="" class="mx-auto text-gray-dark text-sm">Belum Ada Akun?</a>
+                <div class="w-12/12 flex mt-5" @click="$router.push('/web-app/signup')">
+                    <span class="mx-auto text-gray-dark text-sm">Belum Punya Akun?</span>
                 </div>
             </div>
         </div>

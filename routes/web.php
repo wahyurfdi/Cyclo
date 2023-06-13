@@ -46,6 +46,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function() {
 
 Route::prefix('web-app')->group(function() {
     Route::get('/login', [WebAppController::class, 'index']);
+    Route::get('/signup', [WebAppController::class, 'index']);
     Route::get('/home', [WebAppController::class, 'index']);
     Route::get('/history', [WebAppController::class, 'index']);
     Route::get('/history/{code}', [WebAppController::class, 'index']);

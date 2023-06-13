@@ -76,7 +76,7 @@
             }
         },
         computed: {
-            ...mapState(['trashTypes', 'toast', 'token']),
+            ...mapState(['trashTypes', 'toast', 'token', 'profile']),
             totalQty() {
                 let qty = 0
                 this.trashTypes.forEach((trashType) => {
@@ -102,7 +102,12 @@
                 return Number(coin).toFixed(0)
             }
         },
-        mounted() {},
+        mounted() {
+            this.form.nama = this.profile.name
+            this.form.telepon = this.profile.phone
+            this.form.alamat = this.profile.address
+            this.form.detailLokasi = this.profile.location_detail
+        },
         methods: {
             ...mapActions(['checkRequestError', 'updateTrashQty', 'showToast']),
             sendTransaction() {

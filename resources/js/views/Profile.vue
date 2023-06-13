@@ -5,7 +5,7 @@
                 <i class="fas fa-circle-user text-[116px] text-green"></i>
                 <span class="text-base font-bold mt-6 uppercase">{{ profile.name ?? '-' }}</span>
                 <span class="text-base text-gray-dark">@{{ profile.username ?? '-' }}</span>
-                <button class="mb-auto py-3 px-4 rounded-[10px] bg-yellow text-left flex text-green-dark mt-16" @click="logout()">
+                <button class="mb-auto mt-16 mx-auto py-3 px-4 rounded-[10px] bg-yellow text-left flex text-green-dark w-[126px]" @click="logout()">
                     <span class="font-semibold text-base">Logout</span>
                     <i class="fa fa-right-from-bracket text-sm ml-auto my-auto"></i>
                 </button>

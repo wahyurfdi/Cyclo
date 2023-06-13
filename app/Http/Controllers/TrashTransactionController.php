@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\TrashTransaction;
+use App\Models\Customer;
 
 class TrashTransactionController extends Controller
 {
@@ -47,9 +49,22 @@ class TrashTransactionController extends Controller
             }
         }
 
-        $update = TrashTransaction::where('code', $request->trash_transaction_code)->update(['status_code' => $request->status_code]);
-        if(!$update) return $this->sendResponseError('Terjadi kesalahan saat mengubah data');
+        DB::beginTransaction();
+        try {
+            $statuCode = $request->status_code;
+            $trashTransactionCode = $request->trash_transaction_code;
 
-        return $this->sendResponseSuccess('Berhasil mengubah data', []);
+            TrashTransaction::where('code', $trashTransactionCode)->update(['status_code' => $statuCode]);
+            if($statuCode == 'COMPLETED') {
+                $trashTransaction = TrashTransaction::where('code', $trashTransactionCode)->first();
+                Customer::where('id', $trashTransaction->customer_id)->update(['coin' => DB::raw('coin+'.$trashTransaction->total_coin)]);
+            }
+            
+            DB::commit();
+            return $this->sendResponseSuccess('Berhasil mengubah data', []);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->sendResponseError($e->getMessage());
+        }
     }
 }
